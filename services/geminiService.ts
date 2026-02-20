@@ -90,7 +90,7 @@ export const chatWithContext = async (
   documents: DocumentSource[],
   onStream?: (partialText: string) => void
 ): Promise<ChatResponse> => {
-  const apiKey = process.env.API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   const ZALO_LINK = "https://zalo.me/0943841155";
   
   if (!apiKey || apiKey === "undefined") {
