@@ -1,0 +1,18 @@
+
+{
+  "name": "AI Chat QLKT",
+  "short_name": "AI Chat",
+  "description": "Hệ thống AI hỗ trợ quản lý kỹ thuật lưới điện phân phối và các vấn đề liên quan đến ngành điện",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2593/2593635.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
