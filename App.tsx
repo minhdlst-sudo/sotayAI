@@ -509,7 +509,7 @@ const App: React.FC = () => {
       });
 
     return () => {
-      supabaseClient.removeChannel(room);
+      supabaseClient?.removeChannel(room);
     };
   }, [currentUser]);
 
