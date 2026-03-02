@@ -1,25 +1,20 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { DocumentSource, Message, GroundingLink, User } from './types';
+import { ZALO_LINK, ZALO_OA_LINK, WEBSITE_LINK, APP_VERSION, DEFAULT_MASTER_SHEET_URL, MASTER_ADMIN_USERNAME, ADMIN_VERIFY_PASSWORD } from './constants';
 import { parsePdf, parseExcel, parseWord, fetchGoogleSheetAsCsv, fetchAndParseDriveFile } from './services/fileParser';
 import { chatWithContext, generateSpeech } from './services/geminiService';
 import { saveDocuments, loadDocuments } from './services/storageService';
 import { loginUser, registerUser, getCurrentUser, setCurrentUser, getAllUsers, deleteUser, updateUserStatus, supabaseClient } from './services/authService';
 
-const ZALO_LINK = "https://zalo.me/0943841155";
-const ZALO_OA_LINK = "https://zalo.me/app/link/zymyauwkzd"; 
-const WEBSITE_LINK = "https://chuyendoisodlst.com";
 const REMEMBERED_CREDS_KEY = 'dst_ai_remembered_creds';
 const LAST_VERSION_KEY = 'dst_ai_last_seen_version';
 
-const APP_VERSION = "2.8.8"; 
 const UPDATE_NOTES = [
   "Giao diện: Hiển thị tổng số Link tìm thấy trong Master Sheet trên thanh Header.",
   "Hiệu năng: Tăng tốc độ đồng bộ dữ liệu.",
   "Cập nhật: Tự động đồng bộ dữ liệu mới mỗi 120 phút."
 ];
-
-const DEFAULT_MASTER_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1UEXskG7DKDk_d1JqvnOv2Cz-AAlA22C4iTMaI9qWbm4/edit';
 
 const AuthView: React.FC<{ onLogin: (user: User) => void }> = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -957,7 +952,7 @@ const App: React.FC = () => {
     );
   }
 
-  const isMasterAdmin = currentUser?.username === 'Minhnt4';
+  const isMasterAdmin = currentUser?.username === MASTER_ADMIN_USERNAME;
   const pendingUsers = allUsers.filter(u => u.status === 'pending');
   const approvedUsers = allUsers.filter(u => u.status === 'approved');
 
@@ -1219,7 +1214,7 @@ const App: React.FC = () => {
              <h3 className="text-lg font-black text-slate-800 text-center mb-6 uppercase tracking-tight">Xác thực Admin</h3>
              <form onSubmit={(e) => {
                e.preventDefault();
-               if(authPassword === 'DST123M') { 
+               if(authPassword === ADMIN_VERIFY_PASSWORD) { 
                  setActiveTab('users'); 
                  setIsAuthModalOpen(false); 
                  setAuthPassword(''); 
