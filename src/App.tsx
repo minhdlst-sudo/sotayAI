@@ -1,10 +1,10 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { DocumentSource, Message, GroundingLink, User } from './types';
-import { parsePdf, parseExcel, parseWord, fetchGoogleSheetAsCsv, fetchAndParseDriveFile } from './services/fileParser';
-import { chatWithContext, generateSpeech } from './services/geminiService';
-import { saveDocuments, loadDocuments } from './services/storageService';
-import { loginUser, registerUser, getCurrentUser, setCurrentUser, getAllUsers, deleteUser, updateUserStatus, supabaseClient } from './services/authService';
+import { parsePdf, parseExcel, parseWord, fetchGoogleSheetAsCsv, fetchAndParseDriveFile } from '@/services/fileParser';
+import { chatWithContext, generateSpeech } from '@/services/geminiService';
+import { saveDocuments, loadDocuments } from '@/services/storageService';
+import { loginUser, registerUser, getCurrentUser, setCurrentUser, getAllUsers, deleteUser, updateUserStatus, supabaseClient } from '@/services/authService';
 
 const ZALO_LINK = "https://zalo.me/0943841155";
 const ZALO_OA_LINK = "https://zalo.me/app/link/zymyauwkzd"; 
