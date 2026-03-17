@@ -1,5 +1,6 @@
 import { GoogleGenAI, Modality } from "@google/genai";
 import { DocumentSource, Message, GroundingLink } from "../types";
+import { ZALO_LINK } from "../constants";
 
 export interface ChatResponse {
   text: string;
@@ -90,8 +91,7 @@ export const chatWithContext = async (
   documents: DocumentSource[],
   onStream?: (partialText: string) => void
 ): Promise<ChatResponse> => {
-  const apiKey = process.env.GEMINI_API_KEY;
-  const ZALO_LINK = "https://zalo.me/0943841155";
+  const apiKey = process.env.API_KEY;
   
   if (!apiKey || apiKey === "undefined") {
     return { text: `Hệ thống chưa được cấu hình API Key. Liên hệ admin qua Zalo: ${ZALO_LINK}` };

@@ -1,5 +1,6 @@
 
 import { User } from '../types';
+import { MASTER_ADMIN_USERNAME } from '../constants';
 import { createClient } from '@supabase/supabase-js';
 
 const USERS_KEY = 'dst_ai_users';
@@ -13,8 +14,8 @@ const CREDENTIALS_KEY = 'dst_ai_credentials';
  * 2. Tạo table 'users_registry' với các cột: username (text, PK), password (text), role (text), status (text)
  * 3. Điền URL và ANON KEY vào 2 hằng số bên dưới.
  */
-const SUPABASE_URL = 'https://cctjgjnbstuxrucsabro.supabase.co'; // Dán URL Project Supabase của bạn vào đây
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjdGpnam5ic3R1eHJ1Y3NhYnJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg3Njk1NDQsImV4cCI6MjA4NDM0NTU0NH0.pZKjGeWFL8CJpQgmtK5GuLHWBLvHVnVESgYu-umXUkw'; // Dán Anon Key Supabase của bạn vào đây
+const SUPABASE_URL = process.env.SUPABASE_URL || '';
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
 
 // Export supabase client để App.tsx có thể dùng tính năng Realtime
 export const supabaseClient = (SUPABASE_URL && SUPABASE_ANON_KEY) 
@@ -47,7 +48,7 @@ export const getAllUsers = async (): Promise<User[]> => {
 };
 
 export const registerUser = async (username: string, password: string): Promise<User> => {
-  const isAdmin = username === 'Minhnt4';
+  const isAdmin = username === MASTER_ADMIN_USERNAME;
   const newUser: User = { 
     username, 
     role: isAdmin ? 'admin' : 'user',
@@ -151,7 +152,7 @@ export const setCurrentUser = (user: User | null) => {
 };
 
 export const deleteUser = async (username: string) => {
-  if (username === 'Minhnt4') throw new Error('Không thể xóa admin hệ thống');
+  if (username === MASTER_ADMIN_USERNAME) throw new Error('Không thể xóa admin hệ thống');
   
   if (supabaseClient) {
     await supabaseClient.from('users_registry').delete().eq('username', username);
