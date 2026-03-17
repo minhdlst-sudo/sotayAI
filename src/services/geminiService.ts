@@ -145,15 +145,14 @@ export const chatWithContext = async (
 
   try {
     const responseStream = await ai.models.generateContentStream({
-      model: 'gemini-3-flash-preview', 
+      model: 'gemini-3.1-flash-preview', // Update to 3.1 for better stability
       contents: [
         ...relevantHistory,
         { role: 'user', parts: [{ text: currentMessage }] }
       ],
       config: {
         systemInstruction: systemInstruction,
-        temperature: 0.4, // Lower temperature for more factual data extraction
-        // tools: [{ googleSearch: {} }] // DISABLED for cost saving
+        temperature: 0.4,
       }
     });
 
@@ -195,9 +194,21 @@ export const chatWithContext = async (
   } catch (error: any) {
     console.error("Gemini Error:", error);
     let errorMsg = "Hệ thống đang bận.";
-    if (error.message?.includes("API_KEY")) errorMsg = "Lỗi cấu hình API.";
-    else if (error.message?.includes("token")) errorMsg = "File quá lớn, vui lòng chia nhỏ để xử lý tốt hơn.";
-    else if (error.message?.includes("quota")) errorMsg = "Hệ thống quá tải, vui lòng thử lại sau 30s.";
+    
+    // Detailed error parsing
+    const errMsg = error.message?.toLowerCase() || "";
+    if (errMsg.includes("api_key") || errMsg.includes("api key") || errMsg.includes("401") || errMsg.includes("unauthorized")) {
+        errorMsg = "Lỗi xác thực: API Key không hợp lệ hoặc chưa được cấp quyền.";
+    } else if (errMsg.includes("token") || errMsg.includes("limit")) {
+        errorMsg = "Dữ liệu quá lớn: Vui lòng chia nhỏ file hoặc hỏi câu hỏi cụ thể hơn.";
+    } else if (errMsg.includes("quota") || errMsg.includes("429")) {
+        errorMsg = "Hệ thống quá tải: Vui lòng thử lại sau 30 giây.";
+    } else if (errMsg.includes("not found") || errMsg.includes("404")) {
+        errorMsg = "Lỗi hệ thống: Model AI không khả dụng hoặc sai cấu hình.";
+    } else {
+        // Fallback to showing a snippet of the actual error for debugging
+        errorMsg = `Lỗi hệ thống: ${error.message?.substring(0, 100) || "Không xác định"}`;
+    }
     
     const finalMsg = `${errorMsg} (Zalo: 0943841155)`;
     if (onStream) onStream(finalMsg);
