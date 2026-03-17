@@ -90,7 +90,7 @@ export const chatWithContext = async (
   documents: DocumentSource[],
   onStream?: (partialText: string) => void
 ): Promise<ChatResponse> => {
-  const apiKey = process.env.API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   const ZALO_LINK = "https://zalo.me/0943841155";
   
   if (!apiKey || apiKey === "undefined") {
@@ -145,7 +145,7 @@ export const chatWithContext = async (
 
   try {
     const responseStream = await ai.models.generateContentStream({
-      model: 'gemini-3.1-flash-preview', // Update to 3.1 for better stability
+      model: 'gemini-3-flash-preview', 
       contents: [
         ...relevantHistory,
         { role: 'user', parts: [{ text: currentMessage }] }
@@ -217,7 +217,7 @@ export const chatWithContext = async (
 };
 
 export const generateSpeech = async (text: string): Promise<string | null> => {
-  const apiKey = process.env.API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey || apiKey === "undefined") {
       throw new Error("Chưa cấu hình API Key");
   }
