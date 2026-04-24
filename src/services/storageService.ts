@@ -2,6 +2,9 @@
 /**
  * Service for handling local storage using IndexedDB
  */
+/**
+ * Service for handling local storage using IndexedDB
+ */
 import { DocumentSource } from '../types';
 
 const DB_NAME = 'AIChatQLKT_DB';

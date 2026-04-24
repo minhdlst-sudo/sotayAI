@@ -91,7 +91,7 @@ const AuthView: React.FC<{ onLogin: (user: User) => void }> = ({ onLogin }) => {
             </svg>
           </div>
         </div>
-        <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">AI ĐST-QNPC</h2>
+        <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">AI PKT-QNPC</h2>
         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Hệ thống Trí tuệ Nhân tạo</p>
         <span className="mt-2 px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[9px] font-black rounded-full border border-indigo-100 uppercase tracking-tighter">Version {APP_VERSION}</span>
       </div>
@@ -442,7 +442,7 @@ const App: React.FC = () => {
   const [showUserGuide, setShowUserGuide] = useState(false);
   const [showInstallGuide, setShowInstallGuide] = useState(false);
   const [hasApiKey, setHasApiKey] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([{ role: 'model', text: `Chào bạn! Tôi là trợ lý ảo AI ĐST-QNPC. Rất vui làm việc cùng bạn về mọi khía cạnh của ngành Điện và các số liệu của Đội QLĐ Sơn Tịnh`, timestamp: new Date() }]);
+  const [messages, setMessages] = useState<Message[]>([{ role: 'model', text: ` Chào A/E PKT-QNPC. Tôi là trợ lý ảo chuyên về kỹ thuật điện, đấu thầu và mua sắm. Hãy nạp dữ liệu để tôi phân tích chuyên sâu cho A/E`, timestamp: new Date() }]);
   const [isTyping, setIsTyping] = useState(false);
   const [input, setInput] = useState('');
   const [masterSheetUrl, setMasterSheetUrl] = useState(() => localStorage.getItem('master_sheet_url') || DEFAULT_MASTER_SHEET_URL);
@@ -916,9 +916,9 @@ const App: React.FC = () => {
 
   const handleShare = async () => {
     const url = window.location.href;
-    const shareText = `Mời bạn sử dụng Trợ lý ảo AI ĐST-QNPC hỗ trợ quản lý kỹ thuật lưới điện.\nTruy cập tại: ${url}`;
+    const shareText = `Mời bạn sử dụng Trợ lý ảo AI PKT-QNPC hỗ trợ quản lý kỹ thuật lưới điện.\nTruy cập tại: ${url}`;
     const shareData = {
-        title: 'AI ĐST-QNPC',
+        title: 'AI PKT-QNPC',
         text: shareText, 
         url: url,
     };
@@ -974,7 +974,7 @@ const App: React.FC = () => {
                 </div>
                 <div>
                   <div className="flex items-baseline space-x-2">
-                    <h1 className="text-sm font-black uppercase tracking-tight">AI ĐST-QNPC</h1>
+                    <h1 className="text-sm font-black uppercase tracking-tight">AI PKT-QNPC</h1>
                     <span className="text-[9px] font-bold text-indigo-200 uppercase tracking-widest">| {currentUser?.username}</span>
                   </div>
                   <div className="flex items-center mt-0.5 space-x-2">
@@ -1008,11 +1008,7 @@ const App: React.FC = () => {
                     <div className="p-2 space-y-1">
                         <button onClick={() => { window.open(WEBSITE_LINK, '_blank'); setShowMenu(false); }} className="w-full text-left p-3 text-xs font-black uppercase text-blue-600 hover:bg-blue-50 rounded-xl flex items-center transition-colors">
                             <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
-                            WEBSITE ĐST
-                        </button>
-                        <button onClick={() => { window.open(ZALO_OA_LINK, '_blank'); setShowMenu(false); }} className="w-full text-left p-3 text-xs font-black uppercase text-blue-600 hover:bg-blue-50 rounded-xl flex items-center transition-colors">
-                            <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
-                            ZALO OA (OFFICIAL)
+                            WEBSITE QLKT
                         </button>
                         <div className="h-px bg-slate-100 my-1"></div>
                         <button onClick={handleShare} className="w-full text-left p-3 text-xs font-black uppercase text-emerald-600 hover:bg-emerald-50 rounded-xl flex items-center transition-colors">
